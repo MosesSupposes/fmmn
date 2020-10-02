@@ -1,3 +1,5 @@
 const fs = require("fs");
 
-fs.createReadStream(process.argv[2]).pipe(process.stdout);
+if (require.main === module) {
+	fs.createReadStream(process.argv[2]).pipe(process.stdout);
+}
