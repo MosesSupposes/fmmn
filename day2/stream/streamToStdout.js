@@ -1,5 +1,12 @@
 const fs = require("fs");
+const through = require("through2");
 
-if (require.main === module) {
-	fs.createReadStream(process.argv[2]).pipe(process.stdout);
+fs.createReadStream("greetz.txt")
+	.pipe(toUpper())
+	.pipe(process.stdout);
+
+function toUpper() {
+	return through((buf, enc, next) =>
+		next(null, buf.toString().toUpperCase())
+	);
 }
